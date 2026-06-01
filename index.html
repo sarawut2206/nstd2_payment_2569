@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บัญชีชำระเงิน นศท. ชั้นปีที่ 2 ปีการศึกษา 2569</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy2: #162d4f;
+    --navy3: #1e3d6a;
+    --gold: #c8a84b;
+    --gold2: #e8c56a;
+    --gold-light: #f5e6b8;
+    --cash-green: #0a7a55;
+    --cash-bg: #e6f5ef;
+    --cash-border: #5dbf9a;
+    --transfer-blue: #1456a0;
+    --transfer-bg: #e6f0fb;
+    --transfer-border: #6aabef;
+    --pending-bg: #fdf6e3;
+    --pending-text: #8a6800;
+    --pending-border: #e8c56a;
+    --bg: #f2f4f8;
+    --surface: #ffffff;
+    --surface2: #f8f9fc;
+    --text: #0d1f3c;
+    --text2: #4a5568;
+    --text3: #8896a8;
+    --border: #dde2ec;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --shadow: 0 2px 12px rgba(13,31,60,0.08);
+    --shadow-md: 0 4px 24px rgba(13,31,60,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sarabun', 'IBM Plex Sans Thai', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+  }
+
+  /* ===== TOP BAR ===== */
+  .topbar {
+    background: var(--navy);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(13,31,60,0.25);
+  }
+  .topbar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 14px; }
+  .logo-circle {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: var(--navy);
+    flex-shrink: 0;
+    letter-spacing: -1px;
+  }
+  .topbar-title { color: #fff; }
+  .topbar-title h1 { font-size: 16px; font-weight: 600; line-height: 1.3; }
+  .topbar-title p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 1px; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+
+  .btn-export {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 16px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn-export:hover { background: var(--gold2); }
+  .btn-export:active { transform: scale(0.97); }
+  .btn-export svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .btn-reset {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .btn-reset:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+  /* ===== MAIN ===== */
+  .main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  /* ===== STATS ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .stat-card.total::before { background: var(--navy3); }
+  .stat-card.cash::before { background: var(--cash-green); }
+  .stat-card.transfer::before { background: var(--transfer-blue); }
+  .stat-card.pending::before { background: var(--gold); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text3);
+    font-weight: 500;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text);
+  }
+  .stat-card.cash .stat-value { color: var(--cash-green); }
+  .stat-card.transfer .stat-value { color: var(--transfer-blue); }
+  .stat-card.pending .stat-value { color: #8a6800; }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 4px;
+  }
+  .stat-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.07;
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 900;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-wrap {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-label { font-size: 13px; color: var(--text2); white-space: nowrap; min-width: 80px; }
+  .progress-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+    display: flex;
+  }
+  .progress-seg {
+    height: 100%;
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .progress-seg.cash { background: var(--cash-green); }
+  .progress-seg.transfer { background: var(--transfer-blue); }
+  .progress-pct { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; min-width: 50px; text-align: right; }
+
+  /* ===== CONTROLS ===== */
+  .controls {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .search-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    color: var(--text3);
+    pointer-events: none;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--surface2);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-wrap input:focus {
+    border-color: var(--navy3);
+    box-shadow: 0 0 0 3px rgba(30,61,106,0.1);
+    background: var(--surface);
+  }
+
+  .pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill {
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--surface2);
+    color: var(--text2);
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .pill:hover { border-color: var(--navy3); color: var(--navy); }
+  .pill.active-all { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .pill.active-cash { background: var(--cash-bg); color: var(--cash-green); border-color: var(--cash-border); }
+  .pill.active-transfer { background: var(--transfer-bg); color: var(--transfer-blue); border-color: var(--transfer-border); }
+  .pill.active-pending { background: var(--pending-bg); color: var(--pending-text); border-color: var(--pending-border); }
+
+  .gender-seg { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .gender-seg button {
+    padding: 7px 16px;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--surface2);
+    color: var(--text2);
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .gender-seg button + button { border-left: 1px solid var(--border); }
+  .gender-seg button.active { background: var(--navy); color: #fff; }
+
+  /* ===== TABLE ===== */
+  .table-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .table-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .table-header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+  }
+  .result-count {
+    font-size: 12px;
+    color: var(--text3);
+    background: var(--surface2);
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+  }
+
+  .table-scroll { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  tbody tr {
+    transition: background 0.12s;
+    border-bottom: 1px solid #f0f2f7;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f8f9fd; }
+  tbody tr.recorded { }
+  tbody td {
+    padding: 11px 16px;
+    color: var(--text);
+    vertical-align: middle;
+  }
+  td.num { color: var(--text3); font-size: 12px; width: 44px; }
+  td.name { font-weight: 500; }
+  td.idno { font-size: 12px; color: var(--text3); font-family: monospace; letter-spacing: 0.3px; }
+
+  .gender-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .gender-badge.m { background: #e8f0fb; color: #1456a0; }
+  .gender-badge.f { background: #fce8f3; color: #9b2c6f; }
+
+  .pay-actions { display: flex; gap: 6px; }
+  .pay-btn {
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: var(--surface2);
+    color: var(--text2);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  .pay-btn:hover { border-color: var(--text2); background: var(--surface); }
+  .pay-btn.sel-cash {
+    background: var(--cash-bg);
+    color: var(--cash-green);
+    border-color: var(--cash-border);
+  }
+  .pay-btn.sel-transfer {
+    background: var(--transfer-bg);
+    color: var(--transfer-blue);
+    border-color: var(--transfer-border);
+  }
+  .pay-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .status-dot.cash { background: var(--cash-green); }
+  .status-dot.transfer { background: var(--transfer-blue); }
+  .status-dot.pending { background: var(--pending-border); }
+
+  .no-result {
+    padding: 48px;
+    text-align: center;
+    color: var(--text3);
+  }
+  .no-result p:first-child { font-size: 32px; margin-bottom: 8px; }
+  .no-result p:last-child { font-size: 14px; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(13,31,60,0.55);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(13,31,60,0.25);
+    transform: translateY(16px) scale(0.97);
+    transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+  .modal p { font-size: 14px; color: var(--text2); margin-bottom: 20px; line-height: 1.6; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .btn-cancel {
+    padding: 9px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface2);
+    color: var(--text2);
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .btn-confirm {
+    padding: 9px 18px;
+    border: none;
+    border-radius: var(--radius);
+    background: #c0392b;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--shadow-md);
+    z-index: 9999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 320px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .main { padding: 16px; }
+    .topbar-inner { padding: 12px 16px; }
+    .topbar-title h1 { font-size: 14px; }
+    .btn-reset span { display: none; }
+  }
+  @media (max-width: 450px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-value { font-size: 26px; }
+  }
+  @media print {
+    .topbar, .controls, .pay-actions, .btn-export, .btn-reset, .modal-overlay, .toast { display: none !important; }
+    .main { padding: 0; }
+    .table-card { box-shadow: none; border: 1px solid #ccc; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <div class="logo-circle">นศท</div>
+      <div class="topbar-title">
+        <h1>บัญชีชำระเงิน นศท. ชั้นปีที่ 2 ปีการศึกษา 2569</h1>
+        <p>โรงเรียนมัธยมวัดหนองแขม — รหัส 011334220</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-reset" onclick="confirmReset()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        <span>รีเซ็ตข้อมูล</span>
+      </button>
+      <button class="btn-export" onclick="exportCSV()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        ส่งออก CSV
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card total">
+      <div class="stat-label">นักเรียนทั้งหมด</div>
+      <div class="stat-value" id="s-total">151</div>
+      <div class="stat-sub">ชาย 128 · หญิง 23</div>
+      <div class="stat-icon">👤</div>
+    </div>
+    <div class="stat-card cash">
+      <div class="stat-label">ชำระเงินสด</div>
+      <div class="stat-value" id="s-cash">0</div>
+      <div class="stat-sub">คน</div>
+      <div class="stat-icon">💵</div>
+    </div>
+    <div class="stat-card transfer">
+      <div class="stat-label">โอนเงิน</div>
+      <div class="stat-value" id="s-transfer">0</div>
+      <div class="stat-sub">คน</div>
+      <div class="stat-icon">🏦</div>
+    </div>
+    <div class="stat-card pending">
+      <div class="stat-label">ยังไม่บันทึก</div>
+      <div class="stat-value" id="s-pending">151</div>
+      <div class="stat-sub">คน</div>
+      <div class="stat-icon">⏳</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">ความคืบหน้า</div>
+    <div class="progress-bar-bg">
+      <div class="progress-seg cash" id="p-cash" style="width:0%"></div>
+      <div class="progress-seg transfer" id="p-transfer" style="width:0%"></div>
+    </div>
+    <div class="progress-pct" id="p-pct">0%</div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="ค้นหาชื่อหรือเลขประจำตัว..." oninput="render()">
+    </div>
+    <div class="gender-seg">
+      <button id="gb-all" class="active" onclick="setGender('all')">ทั้งหมด</button>
+      <button id="gb-male" onclick="setGender('male')">ชาย (128)</button>
+      <button id="gb-female" onclick="setGender('female')">หญิง (23)</button>
+    </div>
+    <div class="pill-group">
+      <button class="pill active-all" id="fb-all" onclick="setFilter('all')">ทั้งหมด</button>
+      <button class="pill" id="fb-cash" onclick="setFilter('cash')">💵 เงินสด</button>
+      <button class="pill" id="fb-transfer" onclick="setFilter('transfer')">🏦 โอนเงิน</button>
+      <button class="pill" id="fb-pending" onclick="setFilter('pending')">⏳ ยังไม่บันทึก</button>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-header-title">รายชื่อ นศท.</div>
+      <div class="result-count" id="result-count">แสดง 151 รายการ</div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ชื่อ - สกุล</th>
+            <th>เพศ</th>
+            <th>เลขประจำตัว นศท.</th>
+            <th>สถานะการชำระ</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    ข้อมูลบันทึกลง Google Sheet อัตโนมัติ · โรงเรียนมัธยมวัดหนองแขม ปีการศึกษา 2569
+  </div>
+</div>
+
+<!-- MODAL RESET -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <h3>⚠️ ยืนยันรีเซ็ตข้อมูล</h3>
+    <p>ข้อมูลการชำระเงินของ นศท. ทุกคนจะถูกลบออกและไม่สามารถกู้คืนได้<br>ต้องการดำเนินการต่อหรือไม่?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">ยกเลิก</button>
+      <button class="btn-confirm" onclick="doReset()">รีเซ็ตข้อมูล</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-dot" id="toast-dot" style="background:#5dbf9a"></div>
+  <span id="toast-msg">บันทึกแล้ว</span>
+</div>
+
+<script>
+const STUDENTS = [
+  {id:"0683328900",name:"กรชนก กระจ่างศรี",g:"female"},
+  {id:"0683328901",name:"กวิสรา ภูมิลำเนา",g:"female"},
+  {id:"0683316686",name:"กิตติยาพร เนาวบุตร",g:"female"},
+  {id:"0683316687",name:"ชณพรรณ โดรินทร์",g:"female"},
+  {id:"0683328902",name:"ญาราภรณ์ วงค์ขันธ์",g:"female"},
+  {id:"0683316688",name:"ณัชชา ดำริพัฒนสกุล",g:"female"},
+  {id:"0683316689",name:"ณัฐฐานันท์ ทิพย์จ้อย",g:"female"},
+  {id:"0683316690",name:"ธนพร ปานยิ้ม",g:"female"},
+  {id:"0683316691",name:"เบญญาภา สิโตทัย",g:"female"},
+  {id:"0683316692",name:"ปสุตา ฑัตตะวร",g:"female"},
+  {id:"0683328903",name:"ปาณิตา ศรีแกล้ว",g:"female"},
+  {id:"0683328904",name:"ปุญญวี เจริญคุณ",g:"female"},
+  {id:"0683316693",name:"พลอยนพเก้า รุ่งเรือง",g:"female"},
+  {id:"0683316694",name:"พิมพ์ณดา พงศ์ธรรมภักดิ์",g:"female"},
+  {id:"0683316912",name:"ภคกนกพร ทวีโชติธนัท",g:"female"},
+  {id:"0683328905",name:"ภคพร ยิ่งรักษา",g:"female"},
+  {id:"0683316695",name:"รินรดา วิวัฒนาวรารมย์",g:"female"},
+  {id:"0683316696",name:"วรกันยา สุจริต",g:"female"},
+  {id:"0683316697",name:"ศศิกาญจน์ แก้วนิพนธ์",g:"female"},
+  {id:"0683316698",name:"ศศิกานต์ สิงห์คลี",g:"female"},
+  {id:"0683316699",name:"ศศิธร หลวงสมบัติ",g:"female"},
+  {id:"0683328906",name:"ศุภาพิชญ์ ล้อมเวียง",g:"female"},
+  {id:"0683316659",name:"อินทิรา พางกะสา",g:"female"},
+  {id:"1683328965",name:"กนกพล แก้วทองเมือง",g:"male"},
+  {id:"1683328966",name:"กรวิชญ์ บุญทา",g:"male"},
+  {id:"1683328967",name:"กฤตวัฒน์ กองสิงห์",g:"male"},
+  {id:"1683312088",name:"กฤติเดช ทองสุภารักคณาภา",g:"male"},
+  {id:"1683328968",name:"กฤษณะพัฒน์ ตันสงวน",g:"male"},
+  {id:"1683328969",name:"กฤษตรีเทพ ทองอร่าม",g:"male"},
+  {id:"1683328970",name:"กวิน คำผา",g:"male"},
+  {id:"1683312089",name:"กิตติเชษฐ์ มนต์พรพรรษ",g:"male"},
+  {id:"1683328971",name:"เกียรติกมล อุตะมะ",g:"male"},
+  {id:"1683312090",name:"คณิน เขตชัยภูมิ",g:"male"},
+  {id:"1683312091",name:"จักรธร จันทร์น้อย",g:"male"},
+  {id:"1683328972",name:"จิตติพัฒน์ จันทร์มี",g:"male"},
+  {id:"1683312092",name:"ฉัตรดนัย เปรมอมรกิจ",g:"male"},
+  {id:"1683328973",name:"ฉัตรบดินทร์ ปานดี",g:"male"},
+  {id:"1683328974",name:"ชนธัญ ศรีเจิมทอง",g:"male"},
+  {id:"1683328975",name:"ชนะกฤช กลอยสวาท",g:"male"},
+  {id:"1683328976",name:"ชยากร งามถาวรวงศ์",g:"male"},
+  {id:"1683312093",name:"ชยากร พจนาภิรักษ์",g:"male"},
+  {id:"1683328977",name:"ชินดนัย เดชะมี",g:"male"},
+  {id:"1683328979",name:"ไชยกร ขำโยม",g:"male"},
+  {id:"1683328980",name:"ไชยวัฒน์ พงษ์นาค",g:"male"},
+  {id:"1683328981",name:"ณฐกร พูนนุช",g:"male"},
+  {id:"1683312094",name:"ณัฏฐกรณ์ ภูนุช",g:"male"},
+  {id:"1683312095",name:"ณัฏฐ์พีรยช อิทธิสัญญากร",g:"male"},
+  {id:"1683312096",name:"ณัฐกานต์ คชงาม",g:"male"},
+  {id:"1683328982",name:"ณัฐกิตติ์ ธนโชติธิติพงศ์",g:"male"},
+  {id:"1683312097",name:"ณัฐชนน ผ่องพันธุ์",g:"male"},
+  {id:"1683328983",name:"ณัฐนนท์ เต้นรัมย์",g:"male"},
+  {id:"1683328984",name:"ณัฐพล กันบัว",g:"male"},
+  {id:"1683328985",name:"ณัฐพัชร์ ภักดี",g:"male"},
+  {id:"1683328986",name:"ณัฐพัทร ทองสิมา",g:"male"},
+  {id:"1683328987",name:"ณิธิพงษ์ ซุ้มชัยวงศ์",g:"male"},
+  {id:"1683312098",name:"เตชิต จันทร์พินิจ",g:"male"},
+  {id:"1683312149",name:"ถิรวัฒน์ วังคะฮาด",g:"male"},
+  {id:"1683312150",name:"ถิรายุ ไชยเกตุ",g:"male"},
+  {id:"1683312151",name:"ทรัพย์สิน ศรีศิลปอุดม",g:"male"},
+  {id:"1683312152",name:"ทศพร กระแสโท",g:"male"},
+  {id:"1683312153",name:"ทิพากร ลำพุทธา",g:"male"},
+  {id:"1683312154",name:"ธนกร โจยะกุลเจริญ",g:"male"},
+  {id:"1683328988",name:"ธนกร โพธิ์ประพันธ์",g:"male"},
+  {id:"1683312155",name:"ธนกฤต เตชะศุภสิน",g:"male"},
+  {id:"1683328989",name:"ธนชาต นาแหยม",g:"male"},
+  {id:"1683312156",name:"ธนนนท์ คชเดช",g:"male"},
+  {id:"1683312157",name:"ธนพนธ์ อาจทวีกุล",g:"male"},
+  {id:"1683312158",name:"ธนพล พลหาญ",g:"male"},
+  {id:"1683328940",name:"ธนภูมิ ลาภสุนทร",g:"male"},
+  {id:"1683328941",name:"ธนะเทพ ชีพชูชัย",g:"male"},
+  {id:"1683328942",name:"ธนา พิบูลธรรมนนท์",g:"male"},
+  {id:"1683328943",name:"ธรดล กิ่งสวัสดิ์",g:"male"},
+  {id:"1683312159",name:"ธราเทพ พวงกิจจา",g:"male"},
+  {id:"1683312160",name:"ธรานนท์ นาประทุม",g:"male"},
+  {id:"1683328944",name:"ธัญเทพ จันทร์ธรรม",g:"male"},
+  {id:"1683312161",name:"ธิติกร สีดำ",g:"male"},
+  {id:"1683328945",name:"ธีรภัทร์ ทวีก้านตง",g:"male"},
+  {id:"1683328946",name:"นนทชา วงษ์ปาน",g:"male"},
+  {id:"1683328947",name:"นนทนพงศ์ กุลปภาวิณ",g:"male"},
+  {id:"1683312036",name:"นพคุณ เรืองเชื้อเหมือน",g:"male"},
+  {id:"1683312037",name:"นพรัตน์ พันธ์หารี",g:"male"},
+  {id:"1683312038",name:"นพรุจ วรัญญูวัฒนะ",g:"male"},
+  {id:"1683328948",name:"นพรุจน์ อินทร์ประดับ",g:"male"},
+  {id:"1683312039",name:"นรานนท์ เลิศหัตถพงศ์",g:"male"},
+  {id:"1683312040",name:"นัทนัน บุญสนธิ",g:"male"},
+  {id:"1683312041",name:"นิชคุณ นิ่มทองคำ",g:"male"},
+  {id:"1683328949",name:"นิติภูมิ ธนสีลังกูร",g:"male"},
+  {id:"1683328950",name:"บุณกรินทร์ เกาะกลาง",g:"male"},
+  {id:"1683312042",name:"บุณยพัฒน์ ทิพย์ประภาพร",g:"male"},
+  {id:"1683312043",name:"บุณยฤทธิ์ แตงสมุทร",g:"male"},
+  {id:"1683328951",name:"ปฏิภาณ จุ้ยทอง",g:"male"},
+  {id:"1683312044",name:"ปเมธินท์ แย้มนุ่น",g:"male"},
+  {id:"1683312045",name:"ปรมะ เกตุโกศล",g:"male"},
+  {id:"1683328952",name:"ปรมัทถ วงศาจันทร์",g:"male"},
+  {id:"1683312046",name:"ปรัญชัย วรเลิศชัยฤทธิ์",g:"male"},
+  {id:"1683328953",name:"ปริญญวัฒน์ ไชยวัฒน์เธียรกุล",g:"male"},
+  {id:"1683312047",name:"ปริทัต โกสูงเนิน",g:"male"},
+  {id:"1683312048",name:"ปรินทร์ บัวพา",g:"male"},
+  {id:"1683328954",name:"ปิยะพงษ์ วรพันธ์",g:"male"},
+  {id:"1683312009",name:"พงศกร ฝาพิมาย",g:"male"},
+  {id:"1683328955",name:"พรเทพ วรรณวรเศรษฐ",g:"male"},
+  {id:"1683312010",name:"พศุตม์ เต็มใจรัก",g:"male"},
+  {id:"1683328956",name:"พิชญะ โฮ่ทองคำ",g:"male"},
+  {id:"1683312011",name:"พิชยะ คุ้มอักษร",g:"male"},
+  {id:"1683312012",name:"พีรพัฒน์ ปานเกษม",g:"male"},
+  {id:"1683312013",name:"พีรพัฒน์ หนูเสน",g:"male"},
+  {id:"1683328957",name:"พุฒิพัชร ฟองสาลี",g:"male"},
+  {id:"1683328958",name:"ภัทร์นรินท์ ชัยเดชาภินันท์",g:"male"},
+  {id:"1683328959",name:"ภัทร์พงศ์ อุดมพรวิรัตน์",g:"male"},
+  {id:"1683328960",name:"ภัทรพล เลี้ยงพรม",g:"male"},
+  {id:"1683328961",name:"ภัทรวัฒน์ รักงาม",g:"male"},
+  {id:"1683312014",name:"ภาณุวัฒน์ พานเพ็ง",g:"male"},
+  {id:"1683328962",name:"ภานุพงษ์ สุวรรณนัง",g:"male"},
+  {id:"1683328963",name:"ภาวัต เศรษฐบุตร",g:"male"},
+  {id:"1683312015",name:"ภูริณัฐ อ่อนศรี",g:"male"},
+  {id:"1683312016",name:"เมธาวิน เรือนนาค",g:"male"},
+  {id:"1683312077",name:"วทัญญู ศิริสวัสดิ์",g:"male"},
+  {id:"1683312078",name:"วรภัทร ชูทอง",g:"male"},
+  {id:"1683312079",name:"วรวัตร หุตจิตต์",g:"male"},
+  {id:"1683328964",name:"วรวิช บัวเพชร",g:"male"},
+  {id:"1683329139",name:"วสิษฐ์พล รอดพันธุ์",g:"male"},
+  {id:"1683329140",name:"วัชรินทร์ แย้มสายหยุด",g:"male"},
+  {id:"1683312080",name:"วิชัยยุทธ อยู่มงคล",g:"male"},
+  {id:"1683312081",name:"ศักรินทร์ ล้อมเล็ก",g:"male"},
+  {id:"1683329141",name:"ศิรวิชญ์ สายสว่าง",g:"male"},
+  {id:"1683329142",name:"ศุภกร เรืองโรจน์",g:"male"},
+  {id:"1683329143",name:"ศุภกร สุดพูล",g:"male"},
+  {id:"1683312082",name:"ศุภณัฐ งามสี",g:"male"},
+  {id:"1683312083",name:"ศุภณัฐ สังเรือง",g:"male"},
+  {id:"1683312084",name:"ศุภณัฐ สุภกรรม",g:"male"},
+  {id:"1683329144",name:"ศุภวิชญ์ กลยาณีย์",g:"male"},
+  {id:"1683312085",name:"สถิตคุณ สอาดใจ",g:"male"},
+  {id:"1683312086",name:"สรยุทธ แสนสุรีย์",g:"male"},
+  {id:"1683312087",name:"สรวิชญ์ ใจดี",g:"male"},
+  {id:"1683329145",name:"สิรวิชญ์ บุญเอื้อ",g:"male"},
+  {id:"1683312049",name:"สิริชัย ไทยน้อย",g:"male"},
+  {id:"1683312050",name:"สิริเชษฐ์ สังข์วิสิทธิ์",g:"male"},
+  {id:"1683312051",name:"สุกฤต ชินวงศ์",g:"male"},
+  {id:"1683312052",name:"สุขสรรค์ พลรักษา",g:"male"},
+  {id:"1683329146",name:"สุทธิรักษ์ เกิดเพิ่ม",g:"male"},
+  {id:"1683329147",name:"สุภนัย แซ่ฮึง",g:"male"},
+  {id:"1683312053",name:"อนาวิน ภูทองเป้ง",g:"male"},
+  {id:"1683329148",name:"อรรถพล เที่ยงแท้",g:"male"},
+  {id:"1683329149",name:"อัศนัย โสนะจิตร",g:"male"},
+  {id:"1683329150",name:"อัศวกรณ์ มิลินเบญญาทัศน์",g:"male"},
+  {id:"1683329151",name:"อาชวิน เพ็งหมัด",g:"male"},
+  {id:"1683312054",name:"อาทิตย์ ไชยปัญญา",g:"male"},
+  {id:"1683329152",name:"อานนท์ แทนไทยสงค์",g:"male"},
+  {id:"1683329153",name:"อิชย์ ศรีจรูญ",g:"male"},
+  {id:"1683314307",name:"อินเตอร์ หัสคำ",g:"male"},
+  {id:"1683329154",name:"เอลีชา ขินทอง",g:"male"},
+];
+
+// ==========================================
+//  🔧 ใส่ URL ของ Google Apps Script ตรงนี้
+// ==========================================
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXXXX/exec';
+// ==========================================
+
+const STORAGE_KEY = 'nstd2_pay_2569';
+let pay = {};
+let gFilter = 'all';
+let sFilter = 'all';
+let toastTimer = null;
+let pendingQueue = {};   // รอส่งใหม่ถ้า offline
+
+function loadData() {
+  try { pay = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { pay = {}; }
+}
+
+function saveLocal() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(pay));
+}
+
+async function sendToSheet(student, status) {
+  const payload = {
+    id:     student.id,
+    name:   student.name,
+    gender: student.g === 'female' ? 'หญิง' : 'ชาย',
+    status: status   // 'cash' | 'transfer' | 'cancel'
+  };
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // no-cors → ไม่ได้รับ response body แต่ถือว่าส่งสำเร็จ
+    delete pendingQueue[student.id];
+  } catch(err) {
+    // offline → เก็บรอ retry
+    pendingQueue[student.id] = { student, status };
+    console.warn('Offline — จะส่งใหม่เมื่อมีสัญญาณ', err);
+  }
+}
+
+// retry ทุก 30 วินาทีถ้ามีรายการค้าง
+setInterval(() => {
+  Object.values(pendingQueue).forEach(({ student, status }) => sendToSheet(student, status));
+}, 30000);
+
+async function setPay(id, type) {
+  const wasSet = pay[id] === type;
+  if (wasSet) delete pay[id];
+  else pay[id] = type;
+
+  saveLocal();
+  updateStats();
+  render();
+
+  const s = STUDENTS.find(r => r.id === id);
+  const status = wasSet ? 'cancel' : type;
+  const payLabel = type === 'cash' ? 'เงินสด' : 'โอนเงิน';
+  const color = pay[id] ? (pay[id] === 'cash' ? '#5dbf9a' : '#6aabef') : '#e8c56a';
+  const msg = pay[id] ? `บันทึก "${s.name}" — ${payLabel}` : `ยกเลิกการบันทึก "${s.name}"`;
+
+  showToast('⏳ กำลังบันทึก...', '#aaa');
+  await sendToSheet(s, status);
+  showToast(msg, color);
+}
+
+function showToast(msg, color) {
+  const t = document.getElementById('toast');
+  const dot = document.getElementById('toast-dot');
+  const msgEl = document.getElementById('toast-msg');
+  dot.style.background = color || '#5dbf9a';
+  msgEl.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function updateStats() {
+  const cash = Object.values(pay).filter(v => v === 'cash').length;
+  const transfer = Object.values(pay).filter(v => v === 'transfer').length;
+  const pending = STUDENTS.length - cash - transfer;
+  const total = STUDENTS.length;
+  document.getElementById('s-cash').textContent = cash;
+  document.getElementById('s-transfer').textContent = transfer;
+  document.getElementById('s-pending').textContent = pending;
+  const pctCash = (cash / total * 100).toFixed(1);
+  const pctTransfer = (transfer / total * 100).toFixed(1);
+  const pctTotal = ((cash + transfer) / total * 100).toFixed(1);
+  document.getElementById('p-cash').style.width = pctCash + '%';
+  document.getElementById('p-transfer').style.width = pctTransfer + '%';
+  document.getElementById('p-pct').textContent = pctTotal + '%';
+}
+
+function setGender(g) {
+  gFilter = g;
+  ['all','male','female'].forEach(x => {
+    document.getElementById('gb-' + x).classList.toggle('active', x === g);
+  });
+  render();
+}
+
+const filterClasses = { all:'active-all', cash:'active-cash', transfer:'active-transfer', pending:'active-pending' };
+function setFilter(f) {
+  sFilter = f;
+  ['all','cash','transfer','pending'].forEach(x => {
+    const el = document.getElementById('fb-' + x);
+    el.className = 'pill' + (x === f ? ' ' + filterClasses[x] : '');
+  });
+  render();
+}
+
+function render() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  let list = STUDENTS.filter(r => {
+    if (gFilter !== 'all' && r.g !== gFilter) return false;
+    if (sFilter === 'cash' && pay[r.id] !== 'cash') return false;
+    if (sFilter === 'transfer' && pay[r.id] !== 'transfer') return false;
+    if (sFilter === 'pending' && pay[r.id]) return false;
+    if (q && !r.name.includes(q) && !r.id.includes(q)) return false;
+    return true;
+  });
+
+  document.getElementById('result-count').textContent = 'แสดง ' + list.length + ' รายการ';
+
+  const tbody = document.getElementById('tbody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="5"><div class="no-result"><p>🔍</p><p>ไม่พบรายการที่ตรงกับการค้นหา</p></div></td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = list.map((r, i) => {
+    const status = pay[r.id];
+    const gBadge = r.g === 'female'
+      ? '<span class="gender-badge f">หญิง</span>'
+      : '<span class="gender-badge m">ชาย</span>';
+
+    const cashCls = status === 'cash' ? 'pay-btn sel-cash' : 'pay-btn';
+    const trfCls = status === 'transfer' ? 'pay-btn sel-transfer' : 'pay-btn';
+
+    const dotCls = status === 'cash' ? 'cash' : status === 'transfer' ? 'transfer' : 'pending';
+
+    return `<tr class="${status ? 'recorded' : ''}">
+      <td class="num">${i + 1}</td>
+      <td class="name">
+        <span class="status-dot ${dotCls}" style="margin-right:8px;vertical-align:middle"></span>${r.name}
+      </td>
+      <td>${gBadge}</td>
+      <td class="idno">${r.id}</td>
+      <td>
+        <div class="pay-actions">
+          <button class="${cashCls}" onclick="setPay('${r.id}','cash')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            เงินสด
+          </button>
+          <button class="${trfCls}" onclick="setPay('${r.id}','transfer')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            โอนเงิน
+          </button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function exportCSV() {
+  const rows = [['ลำดับ','ชื่อ-สกุล','เพศ','เลขประจำตัว นศท.','การชำระเงิน']];
+  STUDENTS.forEach((r, i) => {
+    const g = r.g === 'female' ? 'หญิง' : 'ชาย';
+    const s = pay[r.id] === 'cash' ? 'เงินสด' : pay[r.id] === 'transfer' ? 'โอนเงิน' : 'ยังไม่บันทึก';
+    rows.push([i + 1, r.name, g, r.id, s]);
+  });
+  const csv = '\uFEFF' + rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'nstd2_payment_2569.csv';
+  a.click();
+  showToast('ส่งออกไฟล์ CSV เรียบร้อยแล้ว', '#5dbf9a');
+}
+
+function confirmReset() { document.getElementById('modal').classList.add('open'); }
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal')) {
+    document.getElementById('modal').classList.remove('open');
+  }
+}
+function doReset() {
+  pay = {};
+  saveLocal();
+  updateStats();
+  render();
+  document.getElementById('modal').classList.remove('open');
+  showToast('รีเซ็ตข้อมูลทั้งหมดเรียบร้อยแล้ว', '#e8c56a');
+}
+
+loadData();
+updateStats();
+render();
+</script>
+</body>
+</html>
