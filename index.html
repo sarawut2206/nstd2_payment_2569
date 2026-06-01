@@ -3,640 +3,381 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>บัญชีชำระเงิน นศท. ชั้นปีที่ 2 ปีการศึกษา 2569</title>
+<title>บันทึกการชำระเงิน นศท. ชั้นปีที่ 2 ปีการศึกษา 2569</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0d1f3c;
-    --navy2: #162d4f;
-    --navy3: #1e3d6a;
-    --gold: #c8a84b;
-    --gold2: #e8c56a;
-    --gold-light: #f5e6b8;
-    --cash-green: #0a7a55;
-    --cash-bg: #e6f5ef;
-    --cash-border: #5dbf9a;
-    --transfer-blue: #1456a0;
-    --transfer-bg: #e6f0fb;
-    --transfer-border: #6aabef;
-    --pending-bg: #fdf6e3;
-    --pending-text: #8a6800;
-    --pending-border: #e8c56a;
-    --bg: #f2f4f8;
-    --surface: #ffffff;
-    --surface2: #f8f9fc;
-    --text: #0d1f3c;
-    --text2: #4a5568;
-    --text3: #8896a8;
-    --border: #dde2ec;
-    --radius: 10px;
-    --radius-lg: 16px;
-    --shadow: 0 2px 12px rgba(13,31,60,0.08);
-    --shadow-md: 0 4px 24px rgba(13,31,60,0.12);
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 60px;
+}
 
-  body {
-    font-family: 'Sarabun', 'IBM Plex Sans Thai', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-  }
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #c8a84b, #f0d070);
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+}
+.header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.header p {
+  font-size: 14px;
+  color: #64748b;
+}
 
-  /* ===== TOP BAR ===== */
-  .topbar {
-    background: var(--navy);
-    padding: 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 16px rgba(13,31,60,0.25);
-  }
-  .topbar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .topbar-left { display: flex; align-items: center; gap: 14px; }
-  .logo-circle {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; font-weight: 700; color: var(--navy);
-    flex-shrink: 0;
-    letter-spacing: -1px;
-  }
-  .topbar-title { color: #fff; }
-  .topbar-title h1 { font-size: 16px; font-weight: 600; line-height: 1.3; }
-  .topbar-title p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 1px; }
-  .topbar-right { display: flex; align-items: center; gap: 10px; }
+/* ===== SEARCH BOX ===== */
+.search-card {
+  width: 100%;
+  max-width: 520px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
 
-  .btn-export {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 16px;
-    background: var(--gold);
-    color: var(--navy);
-    border: none;
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    white-space: nowrap;
-  }
-  .btn-export:hover { background: var(--gold2); }
-  .btn-export:active { transform: scale(0.97); }
-  .btn-export svg { width: 15px; height: 15px; flex-shrink: 0; }
+.search-label {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
 
-  .btn-reset {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 14px;
-    background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.8);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-  .btn-reset:hover { background: rgba(255,255,255,0.18); color: #fff; }
+.search-wrap {
+  position: relative;
+  margin-bottom: 8px;
+}
+.search-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+}
+#searchInput {
+  width: 100%;
+  padding: 14px 14px 14px 44px;
+  background: #0f172a;
+  border: 1.5px solid #334155;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 17px;
+  color: #f1f5f9;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#searchInput::placeholder { color: #475569; }
+#searchInput:focus {
+  border-color: #c8a84b;
+  box-shadow: 0 0 0 3px rgba(200,168,75,0.15);
+}
 
-  /* ===== MAIN ===== */
-  .main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+/* ===== DROPDOWN ===== */
+#dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  z-index: 100;
+  display: none;
+}
+#dropdown.show { display: block; }
 
-  /* ===== STATS ===== */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .stat-card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 18px 20px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-  }
-  .stat-card.total::before { background: var(--navy3); }
-  .stat-card.cash::before { background: var(--cash-green); }
-  .stat-card.transfer::before { background: var(--transfer-blue); }
-  .stat-card.pending::before { background: var(--gold); }
+.drop-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border-bottom: 1px solid #0f172a;
+}
+.drop-item:last-child { border-bottom: none; }
+.drop-item:hover { background: #263247; }
 
-  .stat-label {
-    font-size: 12px;
-    color: var(--text3);
-    font-weight: 500;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .stat-value {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1;
-    color: var(--text);
-  }
-  .stat-card.cash .stat-value { color: var(--cash-green); }
-  .stat-card.transfer .stat-value { color: var(--transfer-blue); }
-  .stat-card.pending .stat-value { color: #8a6800; }
-  .stat-sub {
-    font-size: 11px;
-    color: var(--text3);
-    margin-top: 4px;
-  }
-  .stat-icon {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.07;
-    font-size: 48px;
-    line-height: 1;
-    font-weight: 900;
-    pointer-events: none;
-    user-select: none;
-  }
+.drop-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  flex-shrink: 0;
+}
+.drop-avatar.male   { background: #1e3a5f; color: #7eb8f7; }
+.drop-avatar.female { background: #4a1942; color: #f79ecf; }
 
-  /* ===== PROGRESS BAR ===== */
-  .progress-wrap {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 16px 20px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .progress-label { font-size: 13px; color: var(--text2); white-space: nowrap; min-width: 80px; }
-  .progress-bar-bg {
-    flex: 1;
-    height: 10px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-    display: flex;
-  }
-  .progress-seg {
-    height: 100%;
-    transition: width 0.4s cubic-bezier(.4,0,.2,1);
-  }
-  .progress-seg.cash { background: var(--cash-green); }
-  .progress-seg.transfer { background: var(--transfer-blue); }
-  .progress-pct { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; min-width: 50px; text-align: right; }
+.drop-info { flex: 1; min-width: 0; }
+.drop-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drop-id {
+  font-size: 11px;
+  color: #64748b;
+  font-family: monospace;
+  margin-top: 1px;
+}
 
-  /* ===== CONTROLS ===== */
-  .controls {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 16px 20px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-  }
-  .search-wrap {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-  }
-  .search-wrap svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px; height: 16px;
-    color: var(--text3);
-    pointer-events: none;
-  }
-  .search-wrap input {
-    width: 100%;
-    padding: 9px 12px 9px 36px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 14px;
-    color: var(--text);
-    background: var(--surface2);
-    outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .search-wrap input:focus {
-    border-color: var(--navy3);
-    box-shadow: 0 0 0 3px rgba(30,61,106,0.1);
-    background: var(--surface);
-  }
+.drop-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+.drop-badge.cash     { background: #0d3325; color: #4ade80; }
+.drop-badge.transfer { background: #0f2d4a; color: #60a5fa; }
 
-  .pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pill {
-    padding: 7px 14px;
-    border: 1px solid var(--border);
-    border-radius: 99px;
-    font-family: inherit;
-    font-size: 13px;
-    cursor: pointer;
-    background: var(--surface2);
-    color: var(--text2);
-    transition: all 0.15s;
-    font-weight: 500;
-  }
-  .pill:hover { border-color: var(--navy3); color: var(--navy); }
-  .pill.active-all { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .pill.active-cash { background: var(--cash-bg); color: var(--cash-green); border-color: var(--cash-border); }
-  .pill.active-transfer { background: var(--transfer-bg); color: var(--transfer-blue); border-color: var(--transfer-border); }
-  .pill.active-pending { background: var(--pending-bg); color: var(--pending-text); border-color: var(--pending-border); }
+.drop-no-result {
+  padding: 24px;
+  text-align: center;
+  color: #475569;
+  font-size: 14px;
+}
 
-  .gender-seg { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .gender-seg button {
-    padding: 7px 16px;
-    border: none;
-    font-family: inherit;
-    font-size: 13px;
-    cursor: pointer;
-    background: var(--surface2);
-    color: var(--text2);
-    transition: all 0.15s;
-    font-weight: 500;
-  }
-  .gender-seg button + button { border-left: 1px solid var(--border); }
-  .gender-seg button.active { background: var(--navy); color: #fff; }
+/* ===== SELECTED CARD ===== */
+#selectedCard {
+  display: none;
+  margin-top: 20px;
+  background: #0f172a;
+  border: 1.5px solid #334155;
+  border-radius: 16px;
+  padding: 20px;
+  animation: slideUp 0.2s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#selectedCard.visible { display: block; }
 
-  /* ===== TABLE ===== */
-  .table-card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .table-header {
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .table-header-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text2);
-  }
-  .result-count {
-    font-size: 12px;
-    color: var(--text3);
-    background: var(--surface2);
-    padding: 3px 10px;
-    border-radius: 99px;
-    border: 1px solid var(--border);
-  }
+.sel-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.sel-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700;
+  flex-shrink: 0;
+}
+.sel-avatar.male   { background: #1e3a5f; color: #7eb8f7; }
+.sel-avatar.female { background: #4a1942; color: #f79ecf; }
+.sel-name { font-size: 18px; font-weight: 700; color: #f1f5f9; }
+.sel-id   { font-size: 12px; color: #64748b; font-family: monospace; margin-top: 2px; }
 
-  .table-scroll { overflow-x: auto; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-  }
-  thead th {
-    padding: 11px 16px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text3);
-    background: var(--surface2);
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  tbody tr {
-    transition: background 0.12s;
-    border-bottom: 1px solid #f0f2f7;
-  }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: #f8f9fd; }
-  tbody tr.recorded { }
-  tbody td {
-    padding: 11px 16px;
-    color: var(--text);
-    vertical-align: middle;
-  }
-  td.num { color: var(--text3); font-size: 12px; width: 44px; }
-  td.name { font-weight: 500; }
-  td.idno { font-size: 12px; color: var(--text3); font-family: monospace; letter-spacing: 0.3px; }
+.sel-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: #64748b;
+}
+.sel-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.sel-dot.none     { background: #475569; }
+.sel-dot.cash     { background: #4ade80; }
+.sel-dot.transfer { background: #60a5fa; }
 
-  .gender-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 9px;
-    border-radius: 99px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-  .gender-badge.m { background: #e8f0fb; color: #1456a0; }
-  .gender-badge.f { background: #fce8f3; color: #9b2c6f; }
+.pay-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.pay-btn {
+  padding: 14px 10px;
+  border-radius: 12px;
+  border: 1.5px solid #334155;
+  background: #1e293b;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s;
+}
+.pay-btn:hover { background: #263247; color: #e2e8f0; border-color: #475569; }
 
-  .pay-actions { display: flex; gap: 6px; }
-  .pay-btn {
-    padding: 5px 12px;
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid var(--border);
-    background: var(--surface2);
-    color: var(--text2);
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    white-space: nowrap;
-  }
-  .pay-btn:hover { border-color: var(--text2); background: var(--surface); }
-  .pay-btn.sel-cash {
-    background: var(--cash-bg);
-    color: var(--cash-green);
-    border-color: var(--cash-border);
-  }
-  .pay-btn.sel-transfer {
-    background: var(--transfer-bg);
-    color: var(--transfer-blue);
-    border-color: var(--transfer-border);
-  }
-  .pay-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.pay-btn.active-cash {
+  background: #0d3325;
+  color: #4ade80;
+  border-color: #166534;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.12);
+}
+.pay-btn.active-transfer {
+  background: #0f2d4a;
+  color: #60a5fa;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(96,165,250,0.12);
+}
+.pay-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-  .status-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  .status-dot.cash { background: var(--cash-green); }
-  .status-dot.transfer { background: var(--transfer-blue); }
-  .status-dot.pending { background: var(--pending-border); }
+/* ===== TOAST ===== */
+#toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 99px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+  opacity: 0;
+  z-index: 999;
+  white-space: nowrap;
+}
+#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-  .no-result {
-    padding: 48px;
-    text-align: center;
-    color: var(--text3);
-  }
-  .no-result p:first-child { font-size: 32px; margin-bottom: 8px; }
-  .no-result p:last-child { font-size: 14px; }
+/* ===== SENDING INDICATOR ===== */
+.sending {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #c8a84b;
+  margin-top: 10px;
+  height: 18px;
+}
+.spin {
+  width: 12px; height: 12px;
+  border: 2px solid #334155;
+  border-top-color: #c8a84b;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ===== MODAL ===== */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(13,31,60,0.55);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 20px 60px rgba(13,31,60,0.25);
-    transform: translateY(16px) scale(0.97);
-    transition: transform 0.2s;
-  }
-  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-  .modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
-  .modal p { font-size: 14px; color: var(--text2); margin-bottom: 20px; line-height: 1.6; }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
-  .btn-cancel {
-    padding: 9px 18px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface2);
-    color: var(--text2);
-    font-family: inherit;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  .btn-confirm {
-    padding: 9px 18px;
-    border: none;
-    border-radius: var(--radius);
-    background: #c0392b;
-    color: #fff;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  /* ===== TOAST ===== */
-  .toast {
-    position: fixed;
-    bottom: 24px; right: 24px;
-    background: var(--navy);
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
-    box-shadow: var(--shadow-md);
-    z-index: 9999;
-    transform: translateY(80px);
-    opacity: 0;
-    transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    max-width: 320px;
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-  /* ===== FOOTER ===== */
-  .footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 12px;
-    color: var(--text3);
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 700px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .main { padding: 16px; }
-    .topbar-inner { padding: 12px 16px; }
-    .topbar-title h1 { font-size: 14px; }
-    .btn-reset span { display: none; }
-  }
-  @media (max-width: 450px) {
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .stat-value { font-size: 26px; }
-  }
-  @media print {
-    .topbar, .controls, .pay-actions, .btn-export, .btn-reset, .modal-overlay, .toast { display: none !important; }
-    .main { padding: 0; }
-    .table-card { box-shadow: none; border: 1px solid #ccc; }
-    body { background: white; }
-  }
+/* ===== FOOTER ===== */
+.footer {
+  margin-top: 36px;
+  font-size: 12px;
+  color: #334155;
+  text-align: center;
+  line-height: 1.7;
+}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<nav class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-left">
-      <div class="logo-circle">นศท</div>
-      <div class="topbar-title">
-        <h1>บัญชีชำระเงิน นศท. ชั้นปีที่ 2 ปีการศึกษา 2569</h1>
-        <p>โรงเรียนมัธยมวัดหนองแขม — รหัส 011334220</p>
+<div class="header">
+  <div class="badge">นศท. ชั้นปีที่ 2</div>
+  <h1>บันทึกการชำระเงิน<br>ปีการศึกษา 2569</h1>
+  <p>โรงเรียนมัธยมวัดหนองแขม · รหัส 011334220</p>
+</div>
+
+<div class="search-card">
+  <div class="search-label">🔍 พิมพ์ชื่อหรือเลขประจำตัว</div>
+  <div class="search-wrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="เช่น ธนกร, สมชาย..." autocomplete="off" autocorrect="off" spellcheck="false">
+    <div id="dropdown"></div>
+  </div>
+
+  <!-- SELECTED STUDENT CARD -->
+  <div id="selectedCard">
+    <div class="sel-top">
+      <div class="sel-avatar" id="selAvatar"></div>
+      <div>
+        <div class="sel-name" id="selName"></div>
+        <div class="sel-id" id="selId"></div>
       </div>
     </div>
-    <div class="topbar-right">
-      <button class="btn-reset" onclick="confirmReset()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-        <span>รีเซ็ตข้อมูล</span>
+    <div class="sel-status-row">
+      <div class="sel-dot" id="selDot"></div>
+      <span id="selStatus">ยังไม่บันทึก</span>
+    </div>
+    <div class="pay-buttons">
+      <button class="pay-btn" id="btnCash" onclick="setPay('cash')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="4" width="22" height="16" rx="2"/>
+          <line x1="1" y1="10" x2="23" y2="10"/>
+        </svg>
+        เงินสด
       </button>
-      <button class="btn-export" onclick="exportCSV()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        ส่งออก CSV
+      <button class="pay-btn" id="btnTransfer" onclick="setPay('transfer')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="17 1 21 5 17 9"/>
+          <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/>
+          <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+        โอนเงิน
       </button>
     </div>
-  </div>
-</nav>
-
-<div class="main">
-
-  <!-- STATS -->
-  <div class="stats-grid">
-    <div class="stat-card total">
-      <div class="stat-label">นักเรียนทั้งหมด</div>
-      <div class="stat-value" id="s-total">151</div>
-      <div class="stat-sub">ชาย 128 · หญิง 23</div>
-      <div class="stat-icon">👤</div>
+    <div class="sending" id="sendingRow" style="display:none">
+      <div class="spin"></div> กำลังบันทึกลง Google Sheet...
     </div>
-    <div class="stat-card cash">
-      <div class="stat-label">ชำระเงินสด</div>
-      <div class="stat-value" id="s-cash">0</div>
-      <div class="stat-sub">คน</div>
-      <div class="stat-icon">💵</div>
-    </div>
-    <div class="stat-card transfer">
-      <div class="stat-label">โอนเงิน</div>
-      <div class="stat-value" id="s-transfer">0</div>
-      <div class="stat-sub">คน</div>
-      <div class="stat-icon">🏦</div>
-    </div>
-    <div class="stat-card pending">
-      <div class="stat-label">ยังไม่บันทึก</div>
-      <div class="stat-value" id="s-pending">151</div>
-      <div class="stat-sub">คน</div>
-      <div class="stat-icon">⏳</div>
-    </div>
-  </div>
-
-  <!-- PROGRESS -->
-  <div class="progress-wrap">
-    <div class="progress-label">ความคืบหน้า</div>
-    <div class="progress-bar-bg">
-      <div class="progress-seg cash" id="p-cash" style="width:0%"></div>
-      <div class="progress-seg transfer" id="p-transfer" style="width:0%"></div>
-    </div>
-    <div class="progress-pct" id="p-pct">0%</div>
-  </div>
-
-  <!-- CONTROLS -->
-  <div class="controls">
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="search" placeholder="ค้นหาชื่อหรือเลขประจำตัว..." oninput="render()">
-    </div>
-    <div class="gender-seg">
-      <button id="gb-all" class="active" onclick="setGender('all')">ทั้งหมด</button>
-      <button id="gb-male" onclick="setGender('male')">ชาย (128)</button>
-      <button id="gb-female" onclick="setGender('female')">หญิง (23)</button>
-    </div>
-    <div class="pill-group">
-      <button class="pill active-all" id="fb-all" onclick="setFilter('all')">ทั้งหมด</button>
-      <button class="pill" id="fb-cash" onclick="setFilter('cash')">💵 เงินสด</button>
-      <button class="pill" id="fb-transfer" onclick="setFilter('transfer')">🏦 โอนเงิน</button>
-      <button class="pill" id="fb-pending" onclick="setFilter('pending')">⏳ ยังไม่บันทึก</button>
-    </div>
-  </div>
-
-  <!-- TABLE -->
-  <div class="table-card">
-    <div class="table-header">
-      <div class="table-header-title">รายชื่อ นศท.</div>
-      <div class="result-count" id="result-count">แสดง 151 รายการ</div>
-    </div>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>ชื่อ - สกุล</th>
-            <th>เพศ</th>
-            <th>เลขประจำตัว นศท.</th>
-            <th>สถานะการชำระ</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="footer">
-    ข้อมูลบันทึกลง Google Sheet อัตโนมัติ · โรงเรียนมัธยมวัดหนองแขม ปีการศึกษา 2569
   </div>
 </div>
 
-<!-- MODAL RESET -->
-<div class="modal-overlay" id="modal" onclick="closeModal(event)">
-  <div class="modal">
-    <h3>⚠️ ยืนยันรีเซ็ตข้อมูล</h3>
-    <p>ข้อมูลการชำระเงินของ นศท. ทุกคนจะถูกลบออกและไม่สามารถกู้คืนได้<br>ต้องการดำเนินการต่อหรือไม่?</p>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn-confirm" onclick="doReset()">รีเซ็ตข้อมูล</button>
-    </div>
-  </div>
+<div class="footer">
+  ข้อมูลบันทึกลง Google Sheet อัตโนมัติ<br>
+  โรงเรียนมัธยมวัดหนองแขม ปีการศึกษา 2569
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast">
-  <div class="toast-dot" id="toast-dot" style="background:#5dbf9a"></div>
-  <span id="toast-msg">บันทึกแล้ว</span>
+<div id="toast">
+  <div class="toast-dot" id="toastDot"></div>
+  <span id="toastMsg">บันทึกแล้ว</span>
 </div>
 
 <script>
+// ============================================================
+//  🔧 ใส่ URL ของ Google Apps Script ตรงนี้
+// ============================================================
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweMOwfXgOTEtHT-flWJlpy_PQ5MVy4BJkc1eG38B2sK0D1emLTnYmJGLqCC1kWNmcP/exec';
+// ============================================================
+
 const STUDENTS = [
   {id:"0683328900",name:"กรชนก กระจ่างศรี",g:"female"},
   {id:"0683328901",name:"กวิสรา ภูมิลำเนา",g:"female"},
@@ -791,206 +532,156 @@ const STUDENTS = [
   {id:"1683329154",name:"เอลีชา ขินทอง",g:"male"},
 ];
 
-// ==========================================
-//  🔧 ใส่ URL ของ Google Apps Script ตรงนี้
-// ==========================================
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweMOwfXgOTEtHT-flWJlpy_PQ5MVy4BJkc1eG38B2sK0D1emLTnYmJGLqCC1kWNmcP/exec';
-// ==========================================
+// บันทึก session ชั่วคราวไว้โชว์ badge (ไม่บังคับ login)
+const sessionPay = {};
 
-const STORAGE_KEY = 'nstd2_pay_2569';
-let pay = {};
-let gFilter = 'all';
-let sFilter = 'all';
+let currentStudent = null;
 let toastTimer = null;
-let pendingQueue = {};   // รอส่งใหม่ถ้า offline
 
-function loadData() {
-  try { pay = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { pay = {}; }
+// ===== SEARCH =====
+const input = document.getElementById('searchInput');
+const dropdown = document.getElementById('dropdown');
+
+input.addEventListener('input', () => {
+  const q = input.value.trim();
+  if (q.length < 1) { closeDropdown(); return; }
+  const results = STUDENTS.filter(s =>
+    s.name.includes(q) || s.id.includes(q)
+  ).slice(0, 8);
+  renderDropdown(results, q);
+});
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeDropdown(); input.blur(); }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-wrap')) closeDropdown();
+});
+
+function renderDropdown(results, q) {
+  if (!results.length) {
+    dropdown.innerHTML = '<div class="drop-no-result">ไม่พบชื่อ "' + q + '" ในรายชื่อ</div>';
+    dropdown.classList.add('show');
+    return;
+  }
+  dropdown.innerHTML = results.map(s => {
+    const initials = s.name.charAt(0);
+    const statusBadge = sessionPay[s.id]
+      ? `<span class="drop-badge ${sessionPay[s.id]}">${sessionPay[s.id] === 'cash' ? '💵 เงินสด' : '🏦 โอนแล้ว'}</span>`
+      : '';
+    return `<div class="drop-item" onclick="selectStudent('${s.id}')">
+      <div class="drop-avatar ${s.g}">${initials}</div>
+      <div class="drop-info">
+        <div class="drop-name">${s.name}</div>
+        <div class="drop-id">${s.id}</div>
+      </div>
+      ${statusBadge}
+    </div>`;
+  }).join('');
+  dropdown.classList.add('show');
 }
 
-function saveLocal() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(pay));
+function closeDropdown() {
+  dropdown.classList.remove('show');
+  dropdown.innerHTML = '';
 }
 
-async function sendToSheet(student, status) {
+// ===== SELECT STUDENT =====
+function selectStudent(id) {
+  currentStudent = STUDENTS.find(s => s.id === id);
+  closeDropdown();
+  input.value = currentStudent.name;
+
+  const card = document.getElementById('selectedCard');
+  const initials = currentStudent.name.charAt(0);
+
+  document.getElementById('selAvatar').textContent = initials;
+  document.getElementById('selAvatar').className = 'sel-avatar ' + currentStudent.g;
+  document.getElementById('selName').textContent = currentStudent.name;
+  document.getElementById('selId').textContent = 'เลขประจำตัว: ' + currentStudent.id;
+
+  updateCardStatus();
+  card.classList.add('visible');
+}
+
+function updateCardStatus() {
+  if (!currentStudent) return;
+  const st = sessionPay[currentStudent.id];
+  const dot   = document.getElementById('selDot');
+  const label = document.getElementById('selStatus');
+  const btnC  = document.getElementById('btnCash');
+  const btnT  = document.getElementById('btnTransfer');
+
+  dot.className   = 'sel-dot ' + (st || 'none');
+  label.textContent = st === 'cash' ? '✅ ชำระแล้ว — เงินสด'
+                    : st === 'transfer' ? '✅ ชำระแล้ว — โอนเงิน'
+                    : 'ยังไม่บันทึก';
+  btnC.className = 'pay-btn' + (st === 'cash' ? ' active-cash' : '');
+  btnT.className = 'pay-btn' + (st === 'transfer' ? ' active-transfer' : '');
+}
+
+// ===== SET PAY =====
+async function setPay(type) {
+  if (!currentStudent) return;
+
+  // toggle ถ้ากดซ้ำ
+  const prev = sessionPay[currentStudent.id];
+  const newStatus = prev === type ? null : type;
+
+  if (newStatus) sessionPay[currentStudent.id] = newStatus;
+  else delete sessionPay[currentStudent.id];
+
+  updateCardStatus();
+
+  // แสดง sending
+  const sendRow = document.getElementById('sendingRow');
+  sendRow.style.display = 'flex';
+
   const payload = {
-    id:     student.id,
-    name:   student.name,
-    gender: student.g === 'female' ? 'หญิง' : 'ชาย',
-    status: status   // 'cash' | 'transfer' | 'cancel'
+    id:     currentStudent.id,
+    name:   currentStudent.name,
+    gender: currentStudent.g === 'female' ? 'หญิง' : 'ชาย',
+    status: newStatus || 'cancel'
   };
+
   try {
     await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type':'application/json'},
       body: JSON.stringify(payload)
     });
-    // no-cors → ไม่ได้รับ response body แต่ถือว่าส่งสำเร็จ
-    delete pendingQueue[student.id];
+    sendRow.style.display = 'none';
+    const label = type === 'cash' ? 'เงินสด' : 'โอนเงิน';
+    const msg   = newStatus ? `✅ บันทึก "${currentStudent.name}" — ${label}` : `↩️ ยกเลิก "${currentStudent.name}"`;
+    const color = newStatus === 'cash' ? '#4ade80' : newStatus === 'transfer' ? '#60a5fa' : '#f59e0b';
+    showToast(msg, color);
   } catch(err) {
-    // offline → เก็บรอ retry
-    pendingQueue[student.id] = { student, status };
-    console.warn('Offline — จะส่งใหม่เมื่อมีสัญญาณ', err);
+    sendRow.style.display = 'none';
+    showToast('⚠️ ไม่มีสัญญาณ — ลองใหม่อีกครั้ง', '#f87171');
   }
+
+  // ล้างช่องค้นหาหลัง 1.5 วิ เพื่อพร้อมรับคนต่อไป
+  setTimeout(() => {
+    input.value = '';
+    document.getElementById('selectedCard').classList.remove('visible');
+    currentStudent = null;
+    input.focus();
+  }, 1500);
 }
 
-// retry ทุก 30 วินาทีถ้ามีรายการค้าง
-setInterval(() => {
-  Object.values(pendingQueue).forEach(({ student, status }) => sendToSheet(student, status));
-}, 30000);
-
-async function setPay(id, type) {
-  const wasSet = pay[id] === type;
-  if (wasSet) delete pay[id];
-  else pay[id] = type;
-
-  saveLocal();
-  updateStats();
-  render();
-
-  const s = STUDENTS.find(r => r.id === id);
-  const status = wasSet ? 'cancel' : type;
-  const payLabel = type === 'cash' ? 'เงินสด' : 'โอนเงิน';
-  const color = pay[id] ? (pay[id] === 'cash' ? '#5dbf9a' : '#6aabef') : '#e8c56a';
-  const msg = pay[id] ? `บันทึก "${s.name}" — ${payLabel}` : `ยกเลิกการบันทึก "${s.name}"`;
-
-  showToast('⏳ กำลังบันทึก...', '#aaa');
-  await sendToSheet(s, status);
-  showToast(msg, color);
-}
-
+// ===== TOAST =====
 function showToast(msg, color) {
-  const t = document.getElementById('toast');
-  const dot = document.getElementById('toast-dot');
-  const msgEl = document.getElementById('toast-msg');
-  dot.style.background = color || '#5dbf9a';
-  msgEl.textContent = msg;
+  const t   = document.getElementById('toast');
+  const dot = document.getElementById('toastDot');
+  const m   = document.getElementById('toastMsg');
+  dot.style.background = color || '#4ade80';
+  m.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
-
-function updateStats() {
-  const cash = Object.values(pay).filter(v => v === 'cash').length;
-  const transfer = Object.values(pay).filter(v => v === 'transfer').length;
-  const pending = STUDENTS.length - cash - transfer;
-  const total = STUDENTS.length;
-  document.getElementById('s-cash').textContent = cash;
-  document.getElementById('s-transfer').textContent = transfer;
-  document.getElementById('s-pending').textContent = pending;
-  const pctCash = (cash / total * 100).toFixed(1);
-  const pctTransfer = (transfer / total * 100).toFixed(1);
-  const pctTotal = ((cash + transfer) / total * 100).toFixed(1);
-  document.getElementById('p-cash').style.width = pctCash + '%';
-  document.getElementById('p-transfer').style.width = pctTransfer + '%';
-  document.getElementById('p-pct').textContent = pctTotal + '%';
-}
-
-function setGender(g) {
-  gFilter = g;
-  ['all','male','female'].forEach(x => {
-    document.getElementById('gb-' + x).classList.toggle('active', x === g);
-  });
-  render();
-}
-
-const filterClasses = { all:'active-all', cash:'active-cash', transfer:'active-transfer', pending:'active-pending' };
-function setFilter(f) {
-  sFilter = f;
-  ['all','cash','transfer','pending'].forEach(x => {
-    const el = document.getElementById('fb-' + x);
-    el.className = 'pill' + (x === f ? ' ' + filterClasses[x] : '');
-  });
-  render();
-}
-
-function render() {
-  const q = document.getElementById('search').value.trim().toLowerCase();
-  let list = STUDENTS.filter(r => {
-    if (gFilter !== 'all' && r.g !== gFilter) return false;
-    if (sFilter === 'cash' && pay[r.id] !== 'cash') return false;
-    if (sFilter === 'transfer' && pay[r.id] !== 'transfer') return false;
-    if (sFilter === 'pending' && pay[r.id]) return false;
-    if (q && !r.name.includes(q) && !r.id.includes(q)) return false;
-    return true;
-  });
-
-  document.getElementById('result-count').textContent = 'แสดง ' + list.length + ' รายการ';
-
-  const tbody = document.getElementById('tbody');
-  if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="5"><div class="no-result"><p>🔍</p><p>ไม่พบรายการที่ตรงกับการค้นหา</p></div></td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = list.map((r, i) => {
-    const status = pay[r.id];
-    const gBadge = r.g === 'female'
-      ? '<span class="gender-badge f">หญิง</span>'
-      : '<span class="gender-badge m">ชาย</span>';
-
-    const cashCls = status === 'cash' ? 'pay-btn sel-cash' : 'pay-btn';
-    const trfCls = status === 'transfer' ? 'pay-btn sel-transfer' : 'pay-btn';
-
-    const dotCls = status === 'cash' ? 'cash' : status === 'transfer' ? 'transfer' : 'pending';
-
-    return `<tr class="${status ? 'recorded' : ''}">
-      <td class="num">${i + 1}</td>
-      <td class="name">
-        <span class="status-dot ${dotCls}" style="margin-right:8px;vertical-align:middle"></span>${r.name}
-      </td>
-      <td>${gBadge}</td>
-      <td class="idno">${r.id}</td>
-      <td>
-        <div class="pay-actions">
-          <button class="${cashCls}" onclick="setPay('${r.id}','cash')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            เงินสด
-          </button>
-          <button class="${trfCls}" onclick="setPay('${r.id}','transfer')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            โอนเงิน
-          </button>
-        </div>
-      </td>
-    </tr>`;
-  }).join('');
-}
-
-function exportCSV() {
-  const rows = [['ลำดับ','ชื่อ-สกุล','เพศ','เลขประจำตัว นศท.','การชำระเงิน']];
-  STUDENTS.forEach((r, i) => {
-    const g = r.g === 'female' ? 'หญิง' : 'ชาย';
-    const s = pay[r.id] === 'cash' ? 'เงินสด' : pay[r.id] === 'transfer' ? 'โอนเงิน' : 'ยังไม่บันทึก';
-    rows.push([i + 1, r.name, g, r.id, s]);
-  });
-  const csv = '\uFEFF' + rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'nstd2_payment_2569.csv';
-  a.click();
-  showToast('ส่งออกไฟล์ CSV เรียบร้อยแล้ว', '#5dbf9a');
-}
-
-function confirmReset() { document.getElementById('modal').classList.add('open'); }
-function closeModal(e) {
-  if (!e || e.target === document.getElementById('modal')) {
-    document.getElementById('modal').classList.remove('open');
-  }
-}
-function doReset() {
-  pay = {};
-  saveLocal();
-  updateStats();
-  render();
-  document.getElementById('modal').classList.remove('open');
-  showToast('รีเซ็ตข้อมูลทั้งหมดเรียบร้อยแล้ว', '#e8c56a');
-}
-
-loadData();
-updateStats();
-render();
 </script>
 </body>
 </html>
